@@ -1,5 +1,4 @@
 package org.generation.italy.eventi;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.util.Calendar;
 
@@ -18,8 +17,9 @@ public class Evento {
 			verificaData();
 			verificaP();
 			verificaPP();
-			verificaPT();
 		} catch (Exception e) {
+			this.titolo = null;
+			this.d=null;			
 			System.out.println("impossibile creare oggetto");
 			System.out.println(e.getMessage());
 		}
@@ -62,15 +62,16 @@ public class Evento {
 	}
 
 	public String prenota(int x) throws Exception {
-		if (postiP >= postiT) {
-			throw new Exception("Tutti i Posti sono gia prenotati");
-		}
+		if ((postiP + x) > postiT) {
+			throw new Exception("Hai cercato di prenotare più posti di quelli disponibili");
+		} else {
 		postiP = postiP + x;
 		return "Operazione completata";
+		}
 	}
 
 	public String disdici(int x) throws Exception {
-		if (postiP <= 0) {
+		if ((postiP - x) < 0) {
 			throw new Exception("Non ci sono Posti prenotati");
 		}
 		postiP = postiP - x;
