@@ -1,6 +1,7 @@
 package org.generation.italy.eventi;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -14,8 +15,10 @@ public class Main {
 		int postiT;
 		int menu;
 		int x;
+		ArrayList<Evento> eventi = new ArrayList<Evento>(); 
 		int g;
 		int c = 0;
+		ArrayList <String> risultato = new ArrayList<String>();
 		Evento evento;
 
 		do {
@@ -34,8 +37,18 @@ public class Main {
 				LocalDate d = LocalDate.of(anno, mese, giorno);
 				evento = new Evento(titolo, d, postiT);
 				c = 1;
+				eventi.add(evento);
 			} while (evento.getTitolo() == null);
-
+		
+			risultato=ProgrammEventi.ordinaLista(eventi);
+			
+			
+			for(String e : risultato) {
+			System.out.println(e);
+			}
+			
+			
+			
 			do {
 				System.out.println(
 						"1 Quanti posti vuoi prenotare?, 2 Stampa PostiPrenotati e Disponibili, 3 Quanti Posti vuoi disdire? numero Fine gestione oggetto");
